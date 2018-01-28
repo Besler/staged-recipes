@@ -1,0 +1,43 @@
+{% set name = "AimIO" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://github.com/Numerics88/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 0666b6cb2e78b79a2df38c6c43065082c7b1b7f9e6d3c4fd84fda01075addfcf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - cmake >=3.1.0
+    - boost >=1.56.0
+    - ninja
+    - n88util
+  run:
+    - boost >=1.56.0
+    - n88util
+
+test:
+  commands:
+    - conda inspect linkages -p ${PREFIX} aimio   # [not win]
+    - conda inspect objects -p ${PREFIX} aimio    # [osx]
+
+about:
+  home: https://github.com/Numerics88/AimIO
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: 'A simple C++ class for reading and writing Scanco AIM image files.'
+  description: |
+    A class for reading and writing Scanco AIM image files.
+  dev_url: https://github.com/Numerics88/AimIO
+
+extra:
+  recipe-maintainers:
+    - Besler
